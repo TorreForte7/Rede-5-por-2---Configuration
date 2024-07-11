@@ -1,0 +1,59 @@
+# Server Config
+server:
+  port: ${PORT:0}
+
+# Application Config
+spring:
+  application:
+    name: rede5por2-applyjob
+  cloud:
+    config:
+      enabled: false
+    compatibility-verifier:
+      enabled: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  # RabbitMq Config
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  # Zipkin
+  zipkin:
+    base-url: http://localhost:9411/
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://torre-user:eedV365w@${eureka.instance.hostname}:8761/eureka/
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+# Message-Queue Config
+mq:
+  queues:
+    apply-issuance: apply-issuance
+
+# Management Config
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  # Sleuth
+  tracing:
+    sampling:
+      probability: 1.0
+
+#SprignDoc
+springdoc:
+  show-actuator: true 
+  api-docs:
+    path: rede5por2-applyjob/v3/api-docs
+

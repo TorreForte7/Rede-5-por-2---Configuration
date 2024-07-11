@@ -44,8 +44,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: user
-    password: docker
+    username: guest
+    password: guest
 
 # Eureka Config
 eureka:

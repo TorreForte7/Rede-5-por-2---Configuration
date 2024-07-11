@@ -1,0 +1,81 @@
+# Server Config
+server:
+    port: ${PORT:0}
+
+# Application Config
+spring:
+  application:
+    name: rede5por2-jobs
+  cloud:
+    config:
+      enabled: false
+    compatibility-verifier:
+      enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/torre
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Postgres2022!
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+      defer-datasource-initialization: true
+      database-platform: org.hibernate.dialect.H2Dialect
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
+  # Flyway
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: Postgres2022!
+  # Zipkin
+  zipkin:
+    base-url: http://localhost:9411/
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  # RabbitMq Config
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://torre-user:eedV365w@${eureka.instance.hostname}:8761/eureka/
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+# Message-Queue Config
+mq:
+  queues:
+    torre-issuance: torre-issuance
+    apply-issuance: apply-issuance
+    offer-issuance: offer-issuance
+
+# Management Config
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  # Sleuth
+  tracing:
+    sampling:
+      probability: 1.0
+
+#SprignDoc
+springdoc:
+  show-actuator: true 
+  api-docs:
+    path: rede5por2-jobs/v3/api-docs
+

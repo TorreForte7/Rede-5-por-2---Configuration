@@ -11,8 +11,6 @@ spring:
       enabled: false
     compatibility-verifier:
       enabled: false
-  #     import: optional:configserver:http://localhost:8888/
-  #     profile: dev
   # Database
   datasource:
     url: jdbc:postgresql://localhost:5432/torre
